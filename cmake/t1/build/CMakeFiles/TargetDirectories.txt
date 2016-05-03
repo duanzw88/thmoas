@@ -1,0 +1,1 @@
+/Users/duanzw/stu/cmake/t1/build/CMakeFiles/hello.dir

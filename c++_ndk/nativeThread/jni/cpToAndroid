@@ -1,0 +1,1 @@
+cp -rf ../libs/armeabi-v7a/libthreads.so /Users/duanzw/android/studio_workspace/AndroidStudy/guides/src/main/jniLibs/armeabi-v7a/

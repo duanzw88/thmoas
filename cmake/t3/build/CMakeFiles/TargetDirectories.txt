@@ -1,0 +1,2 @@
+/Users/duanzw/stu/cmake/t3/build/lib/CMakeFiles/hello_static.dir
+/Users/duanzw/stu/cmake/t3/build/lib/CMakeFiles/hello.dir

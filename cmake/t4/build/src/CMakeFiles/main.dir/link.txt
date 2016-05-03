@@ -1,0 +1,1 @@
+/usr/bin/cc   -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/main.dir/main.o  -o main  /Users/duanzw/stu/cmake/t3/build/lib/libhello.dylib 
