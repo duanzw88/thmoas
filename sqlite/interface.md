@@ -10,6 +10,19 @@
 	如果filename参数是NULL或':memory:',那么sqlite3_open将会在RAM中创建一个内存数据库，这只会在session的有效时间内持续。
 	如果filename不为NULL，那么sqlite3_open()将使用这个参数值尝试打开数据库文件，
 	如果该名称的文件不存在，sqlite3_open()将创建一个新的命名为该名称的数据库文件并打开
+
+- 接口
+```
+	int sqlite3_open_v2(const char *filename,sqlite3 **ppDb, int flags, const char *zVfs);
+params:
+	filename: 	数据库文件名
+	ppDb:		输出:数据库句柄
+	flags:		标志，
+				SQLITE_OPEN_CREATE 如果数据库文件不存在，创建一个新的数据库文件打开
+				SQLITE_OPEN_READONLY 以只读的方式打开数据库文件，如果数据库文件不存在，则返回错误
+				SQLITE_OPEN_READWRITE  以读写的方式打开数据库文件，如果数据库文件不存在，则返回错误
+	zVfs:		将使用VFS文件名 一般为NULL
+```
 ## 执行
 
 ```

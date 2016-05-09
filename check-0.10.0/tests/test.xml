@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="http://check.sourceforge.net/xml/check_unittest.xslt"?>
 <testsuites xmlns="http://check.sourceforge.net/ns">
-  <datetime>2016-05-03 17:37:50</datetime>
+  <datetime>2016-05-03 20:31:52</datetime>
   <suite>
     <title>S1</title>
     <test result="success">
@@ -9,7 +9,7 @@
       <fn>ex_output.c:11</fn>
       <id>test_pass</id>
       <iteration>0</iteration>
-      <duration>0.000021</duration>
+      <duration>0.000027</duration>
       <description>Core</description>
       <message>Passed</message>
     </test>
@@ -39,7 +39,7 @@
       <fn>ex_output.c:46</fn>
       <id>test_pass2</id>
       <iteration>0</iteration>
-      <duration>0.000018</duration>
+      <duration>0.000020</duration>
       <description>Core</description>
       <message>Passed</message>
     </test>
@@ -57,7 +57,7 @@
       <fn>ex_output.c:52</fn>
       <id>test_loop</id>
       <iteration>1</iteration>
-      <duration>0.000019</duration>
+      <duration>0.000029</duration>
       <description>Core</description>
       <message>Passed</message>
     </test>
@@ -83,5 +83,5 @@
       <message>fail &quot; &apos; &lt; &gt; &amp; message</message>
     </test>
   </suite>
-  <duration>0.007560</duration>
+  <duration>0.007099</duration>
 </testsuites>
