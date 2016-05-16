@@ -45,6 +45,19 @@
  * 	   |       |	    |      |       |        |           |       |
  * a[0..1]  a[2..3]	a[4..5] a[6..7]	a[8..9] a[10..11]   a[12..13]  a[14..15]
  *
+ * 快速排序：快速排序和归并排序是互补的，归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序
+ * 			快速排序则是当两个数组都有序时，整个数组也就自然有序了
+ * 三项切分的快速排序:
+ * 			从左到右遍历数组一次，维护一个指针lt使得a[start..lt-1]中的元素都小于v
+ * 								 一个指针gt使得a[gt+1..end]中的元素都大于v
+ * 								 一个指针i使得a[lt..i-1]中的元素都等于v
+ * 								 			a[i..gt]中的元素都还未确定
+ * 		    一开始i和lo是相等的，用三向比较来直接处理一下情况:
+ * 		    1.a[i]小于v 将a[lt]和a[i]交换，将lt和i加一
+ * 		    2.a[i]大于v 将a[gt]和a[i]交换，将gt减一
+ * 		    2.a[i]等于v 将i加一
+ * 		    这些操作都会保证数组元素不变且缩小gt-i的值(这样循环才会结束)。另外，除非和切分元素相等，其他元素都会被交换
+ *
  */
 
 
@@ -162,62 +175,74 @@ void shell_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,cons
 // void merge(void *a,int lo,int mid,int hi,int size,int (*cmp)(const void *a,const void *b))
 // {
 // 	printf("%s:%d merge(%d,%d,%d)\n",__FILE__,__LINE__,lo,mid,hi);
-// 	//将a[lo .. mid] 和 a[mid+1 .. hi]归并
-// 	int i = lo;
-// 	int j = mid + 1;
+//
 //
 // 	// char  *pd = (char *)data;
 // 	printf("---------0\n");
-// 	void  *aux = (void *)malloc((hi - lo + 1) * size);
-// 	printf("---------\n");
-// 	// if(aux == NULL)
-// 	// {
-// 	// 	printf("malloc error!!\n");
-// 	// 	return;
-// 	// }
+// 	char  *aux = (char *)malloc((hi - lo + 1) * size);
+// 	printf("---------1\n");
+// 	if(aux == NULL)
+// 	{
+// 		printf("malloc error!!\n");
+// 		return;
+// 	}
 // 	// void *buffer = (void *)malloc(size);
 // 	for(int k = lo; k <= hi; k++)
 // 	{
 // 		//将a[lo .. hi]复制到aux[lo .. hi]中
-// 		char *aux_data = (char *)aux + k * size;
-// 		char *a_data = (char *)a + k * size;
-// 		memcpy(aux_data,a_data,size);
+// 		memcpy(&aux[k * size],&a[k * size],size);
 // 	}
-// 	for(int k = lo;k <= hi;k++)
+// 	printf("---------2\n");
+// 	//将a[lo .. mid] 和 a[mid+1 .. hi]归并
+// 	int pleft = lo;
+// 	int pright = mid + 1;
+// 	int pm = 0;
+// 	while (pleft <= mid || pright <= hi)
 // 	{
+// 		if(pleft > mid)
+// 		{
+// 			//左侧元素已经全部合并
+// 			while(pright <= hi)
+// 			{
+// 				memcpy(&a[pm * size],&aux[pright * size],size);
+// 				pm++;
+// 				pright++;
+// 			}
+// 			continue;
+// 		}
+// 		else if(pright > hi)
+// 		{
+// 			while(pleft <= mid)
+// 			{
+// 				memcpy(&a[pm * size],&aux[pleft * size],size);
+// 				pleft++;
+// 				pm++;
+// 			}
+// 			continue;
+// 		}
 //
-// 		char *a_data = (char *)a + k * size;
-// 		char *jtmp = (char *)aux + j * size;
-// 		char *itmp = (char *)aux + i * size;
-// 		if(i > mid)
+// 		if(cmp(&aux[pleft * size],&aux[pright * size]) < 0)
 // 		{
-// 			memcpy(a_data,jtmp,size);
-// 			j++;
-// 		}
-// 		else if(j > hi)
-// 		{
-// 			memcpy(a_data,itmp,size);
-// 			i++;
-// 		}
-// 		else if(cmp(jtmp,itmp) < 0)
-// 		{
-// 			memcpy(a_data,jtmp,size);
-// 			j++;
+// 			memcpy(&a[pm * size],&aux[pleft * size],size);
+// 			pleft++;
+// 			pm++;
 // 		}
 // 		else
 // 		{
-// 			memcpy(a_data,itmp,size);
-// 			i++;
+// 			memcpy(&a[pm * size],&aux[pright * size],size);
+// 			pright++;
+// 			pm++;
 // 		}
-// 	}
 //
+// 	}
 // 	free(aux);
 //
 // 	printf("%s:%d merge...end\n",__FILE__,__LINE__);
 // }
+
 void merge(void *data,int lpos,int dpos,int rpos,int esize,int (*cmp)(const void *a,const void *b))
 {
-	printf("%s:%d merge(%d,%d,%d)\n",__FILE__,__LINE__,lpos,dpos,rpos);
+	//printf("%s:%d merge(%d,%d,%d)\n",__FILE__,__LINE__,lpos,dpos,rpos);
 
 	char*   pd = (char*)data;
     char*   m;
@@ -279,6 +304,7 @@ void merge(void *data,int lpos,int dpos,int rpos,int esize,int (*cmp)(const void
     /* 释放空间 */
     free(m);
 }
+//自顶向下的归并排序
 void merge_sort(void *a,int lo,int hi,int size,int (*cmp)(const void *a,const void *b))
 {
 	//printf("%s:%d merge_sort(%d,%d)\n",__FILE__,__LINE__,lo,hi);
@@ -296,7 +322,164 @@ void merge_sort(void *a,int lo,int hi,int size,int (*cmp)(const void *a,const vo
 	merge_sort(a,mid+1,hi,size,cmp);
 	merge(a,lo,mid,hi,size,cmp);
 }
+//自底向上的归并排序
+void merge_sort2(void *a,int lo,int hi,int size,int (*cmp)(const void *a,const void *b))
+{
+	//int length = hi - lo + 1;
+	for(int step=1; step <= hi-lo+1; step+=step)
+	{
+		//printf("size = %d\n",step);
+		for(int j=lo; j<= hi-step; j+=step+step)
+		{
+			int min = j+step+step < hi ? j+step+step-1 : hi;
+			//printf("merge(a,%d,%d,%d)\n",j,j+step-1,min);
+			merge(a,j,j + step - 1,min,size,cmp);
+		}
+		printf("\n");
+	}
+}
 
+static int partition(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b))
+{
+	//printf("%s:%d a[%d .. %d]\n",__FILE__,__LINE__,start,end);
+
+	//将数组切分为a[start..i-1] a[i] a[i+1..end]
+	int i = start;
+	int j = end;
+
+	char *data = (char *)a + start * size;
+	while(1)
+	{
+		while(i < end)
+		{
+			char *idata = (char *)a + (i) * size;
+
+			if(cmp(idata,data) > 0)
+			{
+				//printf("%s:%d 左 %c\n",__FILE__,__LINE__,*idata);
+				break;
+			}
+			i++;
+		}
+		while(j > start)
+		{
+			char *jdata = (char *)a + (j) * size;
+			if(cmp(data,jdata) > 0)
+			{
+				//printf("%s:%d 右 %c\n",__FILE__,__LINE__,*jdata);
+				break;
+			}
+			j--;
+		}
+		if(i >= j)
+		{
+			break;
+		}
+		char *idata = (char *)a + i * size;
+		char *jdata = (char *)a + j * size;
+		//printf("%s:%d %c---%c\n",__FILE__,__LINE__,*idata,*jdata);
+		swap(idata,jdata,size);
+	}
+	char *jdata = (char *)a + j * size;
+	swap(data,jdata,size);
+
+	return j;
+}
+//快速排序
+void quick_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b))
+{
+	if(end <= start)
+	{
+		return;
+	}
+	//切分
+	int j = partition(a,start,end,size,cmp);
+	// 将左半部分a[start..j-1]排序
+	quick_sort(a,start,j-1,size,cmp);
+	// 将有半部分a[j..end]排序
+	quick_sort(a,j+1,end,size,cmp);
+}
+// void print_data(char *a,int start,int end,int lt,int i,int gt,int flag)
+// {
+// 	char *buffer = (char *)malloc((end - start + 1) * sizeof(char));
+// 	memcpy(buffer,a,(end-start+1));
+// 	printf("%s\n",buffer);
+// 	if(flag)
+// 	{
+// 		for(int j = start;j <= end;j++)
+// 		{
+// 			if(j == lt)
+// 			{
+// 				printf("l");
+// 			}
+// 			else if(j == gt)
+// 			{
+// 				printf("g");
+// 			}
+// 			else if(j == i)
+// 			{
+// 				printf("i");
+// 			}
+// 			else
+// 			{
+// 				printf("*");
+// 			}
+// 		}
+// 		printf("\n\n");
+// 	}
+//
+//
+// }
+//三项切分的快速排序
+void quick3way_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b))
+{
+	if(end <= start)
+	{
+		return;
+	}
+	int lt = start;
+	int i = start + 1;
+	int gt = end;
+
+
+	while(i <= gt)
+	{
+		char *v = (char *)a + lt * size;
+		char *idata = (char *)a + i * size;
+		int cmpret = cmp(idata,v);
+		//printf("cmp(%c %c) = %d\n",*idata,*v,cmpret);
+		if(cmpret < 0)
+		{
+			//printf("lt....(%d %d %d)\n",lt,i,gt);
+			// print_data(a,start,end,lt,i,gt,0);
+			char *ltdata = (char *)a + lt * size;
+			swap(ltdata,idata,size);
+			lt++;
+			i++;
+			// print_data(a,start,end,lt,i,gt,1);
+
+		}
+		else if(cmpret > 0)
+		{
+			//printf("gt....(%d %d %d)\n",lt,i,gt);
+			char *gtdata = (char *)a + gt * size;
+			// print_data(a,start,end,lt,i,gt,0);
+			swap(idata,gtdata,size);
+			gt--;
+			// print_data(a,start,end,lt,i,gt,1);
+		}
+		else
+		{
+			i++;
+		}
+
+	}
+
+
+	quick3way_sort(a,start,lt-1,size,cmp);
+	// 将有半部分a[j..end]排序
+	quick3way_sort(a,gt+1,end,size,cmp);
+}
 int cmp_int(const void *a,const void *b)
 {
 	assert(a != NULL && b != NULL);

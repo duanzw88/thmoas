@@ -30,6 +30,8 @@ examples=counter_demo \
 		btree_demo \
 		flexstack_demo \
 		threesum_demo \
+		quicksort_demo \
+		quick3way_demo \
 		sort_demo
 EXAMPLES=$(addprefix $(EXAMPLE_DIR)/,$(examples))
 
@@ -74,6 +76,11 @@ $(EXAMPLE_DIR)/flexstack_demo:flexstack_demo.c
 	$(CC) $(CFLAGS) -o $@  $< -I$(INCLUDE_DIR) -L$(LIB_DIR) -lalgorthim
 $(EXAMPLE_DIR)/threesum_demo:threesum_demo.c
 	$(CC) $(CFLAGS) -o $@  $< -I$(INCLUDE_DIR) -L$(LIB_DIR) -lalgorthim
+$(EXAMPLE_DIR)/quicksort_demo:quicksort_demo.c
+	$(CC) $(CFLAGS) -o $@  $< -I$(INCLUDE_DIR) -L$(LIB_DIR) -lalgorthim
+$(EXAMPLE_DIR)/quick3way_demo:quick3way_demo.c
+	$(CC) $(CFLAGS) -o $@  $< -I$(INCLUDE_DIR) -L$(LIB_DIR) -lalgorthim
+
 $(EXAMPLE_DIR)/sort_demo:sort_demo.c
 	$(CC) $(CFLAGS) -o $@  $< -I$(INCLUDE_DIR) -L$(LIB_DIR) -lalgorthim
 clean:
