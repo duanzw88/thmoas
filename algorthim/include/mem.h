@@ -9,8 +9,12 @@ extern void *mem_alloc(long nbytes,const char *file,int line);
 extern void *mem_calloc(long count,long nbytes,const char *file,int line);
 extern void mem_free(void *ptr,const char *file,int line);
 extern void *mem_resize(void *ptr,long nbytes,const char *file,int line);
-extern void mem_leak(void apply(void *ptr,long size,const char *file,int line,void *cl),void *cl);
-
+void mem_leak(void (*apply)(const void *ptr,
+                            int size,
+                            const char *file,
+                            int line,
+                            void *cl),
+                void *cl);
 #define ALLOC(nbytes) mem_alloc((nbytes),__FILE__,__LINE__)
 #define CALLOC(count,nbytes) mem_calloc((count),(nbytes),__FILE__,__LINE__)
 

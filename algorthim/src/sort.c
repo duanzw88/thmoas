@@ -68,6 +68,9 @@
 #include "mem.h"
 #include "assert.h"
 #include "sort.h"
+
+static void sink(void *a,int key,int length,int itemsize,int (*cmp)(const void *a,const void *b));
+
 void swap(void *a,void *b,int size)
 {
 	assert(a != NULL && b != NULL);
@@ -480,6 +483,93 @@ void quick3way_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,
 	// 将有半部分a[j..end]排序
 	quick3way_sort(a,gt+1,end,size,cmp);
 }
+
+/**
+ * 堆排序
+ * @param a     排序的目标数组
+ * @param start 起始位置
+ * @param end   结束位置
+ * @param size  单个数据元素的大小
+ * @param cmp   排序中数据元素的比较方法
+ */
+void heap_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b))
+{
+	int length = end - start + 1;
+	for(int k = length / 2 - 1; k >= start;k--)
+	{
+		sink(a,k,length,size,cmp);
+	}
+	for(int i = length-1; i > 0; --i)
+	{
+		//最大元素存在堆的顶部，即数组中的0下标
+		void *max = (void *)a + 0 * size;
+		void *last = (void *)a + i * size;
+		//printf("max = %c last = %c\n",*(char *)max,*(char *)last);
+		swap(max,last,size);
+		sink(a,0,i,size,cmp);
+		//printf("\n\n");
+	}
+
+}
+/**
+ * 堆的有序化(下沉)
+ * 堆的有序状态因为某个节点变得比它的两个子节点或其中一个节点小，该堆的有序状态被打破
+ * 通过将它和它的两个子节点中比较大者交换来恢复堆
+ * 交换可能会在子节点处继续打破堆的有序状态，因此需要不断地用相同的方式将其修复，将节点向下移动知道它
+ * 的子节点都比它小或者达到了堆的底部
+ * @param  pq  [description]
+ * @param  key [description]
+ * @return     [description]
+ */
+static void sink(void *a,int key,int length,int itemsize,int (*cmp)(const void *a,const void *b))
+{
+	assert(a);
+	// printf("length = %d key = %d\n",length,key);
+	// printf("**************************************\n");
+	// for(int i = 0;i < 11;i++)
+	// {
+	// 	char *data = (char *)a + i * itemsize;
+	// 	printf("%c ",*data);
+	// }
+	// printf("\n---------------------------------------\n");
+	//由于数组书从0开始的下标
+	//所以 左子节点的位置 = 父节点的位置 * 2 + 1；
+	//右子节点的位置 = 左子节点的位置 + 1 =  父节点的位置 * 2  + 2；
+	while(2 * key + 1 < length)
+	{
+		void *father = (void *)a + key * itemsize;
+		int j = 2 * key + 1;
+		if(j < length-1)
+		{
+			void *lchild = (void *)a + j * itemsize;
+			void *rchild = (void *)a + (j + 1) * itemsize;
+			//判断左子树和右子树的大小
+			//如果是右子树大，则下沉到右子树
+			if(cmp(lchild,rchild) < 0)
+			{
+				j++;
+			}
+		}
+		// printf("key = %d j = %d\n",key,j);
+		//j子树对应的数据最大
+		void *child = (void *)a + j * itemsize;
+		if(cmp(father,child) > 0)
+		{
+			break;
+		}
+
+		swap(father,child,itemsize);
+		// pq_print(pq);
+		key = j;
+	}
+
+	// for(int i = 0;i < 11;i++)
+	// {
+	// 	char *data = (char *)a + i * itemsize;
+	// 	printf("%c ",*data);
+	// }
+	// printf("\n**************************************\n");
+}
 int cmp_int(const void *a,const void *b)
 {
 	assert(a != NULL && b != NULL);
@@ -525,19 +615,8 @@ int cmp_char(const void *a,const void *b)
 	assert(a != NULL && b != NULL);
 	const char * lhs = (const char *)a;
 	const char * rhs = (const char *)b;
+	return *lhs - *rhs;
 
-	if(*lhs < *rhs)
-	{
-		return -1;
-	}
-	else if(*lhs == *rhs)
-	{
-		return 0;
-	}
-	else
-	{
-		return 1;
-	}
 }
 int  cmp_string(const void *a,const void *b)
 {

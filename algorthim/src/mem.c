@@ -78,3 +78,13 @@ void *mem_resize(void *ptr, long nbytes, const char *file, int line)
 
 	return ptr;
 }
+
+void mem_leak(void (*apply)(const void *ptr,
+                            int size,
+                            const char *file,
+                            int line,
+                            void *cl),
+                void *cl)
+{
+    printf("please compile mcmchk.c\n");
+}

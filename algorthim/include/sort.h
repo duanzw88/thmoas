@@ -24,6 +24,8 @@ extern void merge_sort2(void *a,int lo,int hi,int size,int (*cmp)(const void *a,
 extern void quick_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b));
 //三项切分的快速排序
 extern void quick3way_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b));
+//堆排序
+extern void heap_sort(void *a,int start,int end,int size,int (*cmp)(const void *a,const void *b));
 extern int 	cmp_int(const void *a,const void *b);
 extern int 	cmp_double(const void *a,const void *b);
 extern int 	cmp_char(const void *a,const void *b);
