@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FaceOut</class>
+ <widget class="QMainWindow" name="FaceOut">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>FaceOut</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QLabel" name="label_data">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>45</y>
+      <width>210</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>-1</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #d9d9d9;
+font-size:50px;</string>
+    </property>
+    <property name="text">
+     <string>data</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_week">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>105</y>
+      <width>200</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #d9d9d9;
+font-size:50px;</string>
+    </property>
+    <property name="text">
+     <string>week</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_time">
+    <property name="geometry">
+     <rect>
+      <x>273</x>
+      <y>155</y>
+      <width>478</width>
+      <height>210</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #2a5a85;
+font-size:140px;</string>
+    </property>
+    <property name="text">
+     <string>time</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_task">
+    <property name="geometry">
+     <rect>
+      <x>273</x>
+      <y>390</y>
+      <width>228</width>
+      <height>68</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="face.qrc">
+      <normaloff>:/img/dl_img_02.png</normaloff>:/img/dl_img_02.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>228</width>
+      <height>68</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_login">
+    <property name="geometry">
+     <rect>
+      <x>523</x>
+      <y>390</y>
+      <width>228</width>
+      <height>68</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="face.qrc">
+      <normaloff>:/img/dl_img_03.png</normaloff>:/img/dl_img_03.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>228</width>
+      <height>68</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_check">
+    <property name="geometry">
+     <rect>
+      <x>273</x>
+      <y>486</y>
+      <width>478</width>
+      <height>68</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="face.qrc">
+      <normaloff>:/img/dl_img_04.png</normaloff>:/img/dl_img_04.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>478</width>
+      <height>68</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_beep">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>45</y>
+      <width>95</width>
+      <height>110</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="face.qrc">
+      <normaloff>:/img/dl_img_01.png</normaloff>:/img/dl_img_01.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>95</width>
+      <height>110</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_dot">
+    <property name="geometry">
+     <rect>
+      <x>472</x>
+      <y>142</y>
+      <width>80</width>
+      <height>210</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #2a5a85;
+font-size:140px;</string>
+    </property>
+    <property name="text">
+     <string>:</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_background">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1024</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(0, 0, 0, 220);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_video">
+    <property name="geometry">
+     <rect>
+      <x>352</x>
+      <y>140</y>
+      <width>320</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string>video</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_exit">
+    <property name="geometry">
+     <rect>
+      <x>352</x>
+      <y>438</y>
+      <width>320</width>
+      <height>62</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:10px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="face.qrc">
+      <normaloff>:/img/dl_img_06.png</normaloff>:/img/dl_img_06.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>328</width>
+      <height>62</height>
+     </size>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_persion">
+    <property name="geometry">
+     <rect>
+      <x>352</x>
+      <y>390</y>
+      <width>321</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: #e5e5e5;
+font-size:44px</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_show">
+    <property name="geometry">
+     <rect>
+      <x>352</x>
+      <y>140</y>
+      <width>320</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>pushButton_login</zorder>
+   <zorder>label_data</zorder>
+   <zorder>label_week</zorder>
+   <zorder>label_time</zorder>
+   <zorder>pushButton_task</zorder>
+   <zorder>pushButton_check</zorder>
+   <zorder>pushButton_beep</zorder>
+   <zorder>label_dot</zorder>
+   <zorder>label_background</zorder>
+   <zorder>label_video</zorder>
+   <zorder>label_persion</zorder>
+   <zorder>pushButton_exit</zorder>
+   <zorder>label_show</zorder>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="face.qrc"/>
+ </resources>
+ <connections/>
+</ui>
