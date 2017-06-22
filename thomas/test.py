@@ -20,3 +20,8 @@ import matplotlib.pyplot as plt
 # plt.show()
 
 
+x = np.arange(0,10,0.001)
+y = np.sin(1/x)
+plt.ylim(-2,2)
+plt.plot(x,y)
+plt.show()
